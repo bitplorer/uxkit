@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uxkit"
+version = "2.0.0"
+description = "Enterprise Python UX library — Tailwind UI polish, shadcn-style local components, SwiftUI-like Views, Regions & Actions — built on ux-dom + ux-channel"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "uxkit contributors"}]
+dependencies = []
+keywords = ["ui", "components", "tailwind", "ssr", "python", "swiftui", "shadcn", "regions", "actions"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "hypothesis>=6.90", "coverage>=7.3"]
+
+[project.scripts]
+uxkit = "uxkit.cli.main:main"
+
+[tool.setuptools.packages.find]
+include = ["ux_channel*", "ux_dom*", "uxkit*"]
+
+[tool.setuptools.package-data]
+uxkit = ["py.typed", "registry/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["property: Hypothesis property tests", "integration: HTTP integration"]
+
+[tool.coverage.run]
+source = ["ux_channel", "ux_dom", "uxkit"]
+omit = ["*/tests/*", "*/demo/*"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
